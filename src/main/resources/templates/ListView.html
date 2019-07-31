@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>ショッピング</title>
+</head>
+<body>
+	<!--
+<tr th:each="Item : ${shoppinglist}">
+<td th:text="${Item.name}"></td>
+</tr>
+-->
+
+	<h1>商品一覧</h1>
+	<!--
+<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width:200px;" th:each="shoppinglist : ${shoppingList}">
+<p th:text="${shoppinglist.itemId}"></p>
+<p th:text="${shoppinglist.name}"></p>
+<input type="number" name="example1" value="0">
+<button type = "submit" name="商品0" value = 0>カートに追加</button>
+</div>
+ -->
+
+	<div
+		style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 200px;">
+		<p th:text="${list_itemId_1}"></p>
+		<p th:text="${list_itemName_1}"></p>
+		<p th:text="${list_itemPrice_1}"></p>
+		<input type="number" name="example1" value="0">
+		<button type="submit" name="商品1" value=1>カートに追加</button>
+	</div>
+
+	<div
+		style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 200px;">
+		<p th:text="${list_itemId_2}"></p>
+		<p th:text="${list_itemName_2}"></p>
+		<p th:text="${list_itemPrice_2}"></p>
+		<input type="number" name="example1" value="0">
+		<button type="submit" name="商品2" value=2>カートに追加</button>
+	</div>
+	<!--
+	<form method="POST" action="List">
+		<input type="text" name="name" /> <input type="submit" value="実行！" />
+		<th:block th:if="${name} and ''!=${name}">
+			<br />
+			<br /> Hello [[${name}]]<br />
+			<p th:text="${list}"></p>
+		</th:block>
+	</form>
+	-->
+	<p th:text="${list}"></p>
+</body>
+</html>
