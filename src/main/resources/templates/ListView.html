@@ -5,49 +5,46 @@
 <title>ショッピング</title>
 </head>
 <body>
-	<!--
-<tr th:each="Item : ${shoppinglist}">
-<td th:text="${Item.name}"></td>
-</tr>
--->
-
 	<h1>商品一覧</h1>
-	<!--
-<div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width:200px;" th:each="shoppinglist : ${shoppingList}">
-<p th:text="${shoppinglist.itemId}"></p>
-<p th:text="${shoppinglist.name}"></p>
-<input type="number" name="example1" value="0">
-<button type = "submit" name="商品0" value = 0>カートに追加</button>
-</div>
- -->
-
 	<div
-		style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 200px;">
-		<p th:text="${list_itemId_1}"></p>
-		<p th:text="${list_itemName_1}"></p>
-		<p th:text="${list_itemPrice_1}"></p>
-		<input type="number" name="example1" value="0">
-		<button type="submit" name="商品1" value=1>カートに追加</button>
+		style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 300px;"
+		th:each="itemList : ${itemList}">
+		<form action="#" th:action="@{/list}" th:object="${listForm}"
+			method="post">
+			<input type="hidden" name="itemId" th:value="${itemList.itemId}">
+			<!--  <input type="hidden" value="${itemList.itemId}" th:field="*{itemId}">-->
+			<p th:text="${itemList.itemId}"></p>
+			<p th:text="${itemList.name}"></p>
+			<tr>
+				<td>個数：</td>
+				<td><input type="number" name="example1" th:field="*{number}"
+					value="0"></td>
+			</tr>
+			<button type="submit" name="addCard">カートに追加</button>
+		</form>
 	</div>
 
-	<div
-		style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 200px;">
-		<p th:text="${list_itemId_2}"></p>
-		<p th:text="${list_itemName_2}"></p>
-		<p th:text="${list_itemPrice_2}"></p>
-		<input type="number" name="example1" value="0">
-		<button type="submit" name="商品2" value=2>カートに追加</button>
+	<h1>カート</h1>
+	<div th:each="orderList : ${cart.orderList}">
+		<div th:each="itemList : ${itemList}">
+			<dev th:if="${orderList.itemId}==${itemList.itemId}">
+			<tr>
+				<td>商品名：</td>
+				<td th:text="${itemList.name}"></td>
+			</tr>
+			<tr>
+				<td>個数：</td>
+				<td th:text="${orderList.num}"></td>
+			</tr>
+			<tr>
+				<td>単価：</td>
+				<td th:text="${itemList.price}"></td>
+			</tr>
+						<tr>
+				<td>合計：</td>
+				<td th:text="${orderList.num}*${itemList.price}"></td>
+			</tr>
+		</div>
 	</div>
-	<!--
-	<form method="POST" action="List">
-		<input type="text" name="name" /> <input type="submit" value="実行！" />
-		<th:block th:if="${name} and ''!=${name}">
-			<br />
-			<br /> Hello [[${name}]]<br />
-			<p th:text="${list}"></p>
-		</th:block>
-	</form>
-	-->
-	<p th:text="${list}"></p>
 </body>
 </html>
