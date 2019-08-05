@@ -13,38 +13,56 @@
 			method="post">
 			<input type="hidden" name="itemId" th:value="${itemList.itemId}">
 			<!--  <input type="hidden" value="${itemList.itemId}" th:field="*{itemId}">-->
-			<p th:text="${itemList.itemId}"></p>
 			<p th:text="${itemList.name}"></p>
 			<tr>
 				<td>個数：</td>
-				<td><input type="number" name="example1" th:field="*{number}"
-					value="0"></td>
+				<td><input type="number" min="0" th:field="*{num}" value="0"></td>
 			</tr>
 			<button type="submit" name="addCard">カートに追加</button>
 		</form>
 	</div>
+	<hr>
+	<th:object th:if="!${#lists.isEmpty(cart.orderList)}">
+		<h1>カート</h1>
+		<th:object th:each="orderList : ${cart.orderList}">
+			<th:object th:each="itemList : ${itemList}">
+				<th:object th:if="${orderList.itemId}==${itemList.itemId}">
+					<div
+						style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 300px;">
+						<p th:text="'商品名：' + ${itemList.name}"></p>
+						<p th:text="'個数：' + ${orderList.num}"></p>
+						<p th:text="'単価：' + ${itemList.price}"></p>
+						<p th:text="'小計：' + ${orderList.num}*${itemList.price}">
+					</div>
+				</th:object>
+			</th:object>
+		</th:object>
 
-	<h1>カート</h1>
-	<div th:each="orderList : ${cart.orderList}">
-		<div th:each="itemList : ${itemList}">
-			<dev th:if="${orderList.itemId}==${itemList.itemId}">
-			<tr>
-				<td>商品名：</td>
-				<td th:text="${itemList.name}"></td>
-			</tr>
-			<tr>
-				<td>個数：</td>
-				<td th:text="${orderList.num}"></td>
-			</tr>
-			<tr>
-				<td>単価：</td>
-				<td th:text="${itemList.price}"></td>
-			</tr>
-						<tr>
-				<td>合計：</td>
-				<td th:text="${orderList.num}*${itemList.price}"></td>
-			</tr>
-		</div>
-	</div>
+
+		<u><h2 th:text="'合計：' + ${total} +'円'"></h2></u>
+	</th:object>
+
+	<!--
+	<table border="1">
+		<tr>
+			<th>商品名</th>
+			<th>単価</th>
+			<th>個数</th>
+			<th>合計</th>
+		</tr>
+		<th:block th:each="orderList : ${cart.orderList}">
+			<th:block th:each="itemList : ${itemList}">
+				<th:block th:if="${orderList.itemId}==${itemList.itemId}">
+					<tr>
+						<td th:text="${itemList.name}"></td>
+						<td th:text="${orderList.num}"></td>
+						<td th:text="${itemList.price}"></td>
+						<td th:text="${orderList.num}*${itemList.price}"></td>
+					</tr>
+				</th:block>
+			</th:block>
+		</th:block>
+	</table>
+	-->
 </body>
 </html>

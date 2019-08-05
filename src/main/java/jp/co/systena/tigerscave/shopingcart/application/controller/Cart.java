@@ -17,11 +17,4 @@ public class Cart {
   public List<Order> getOrderList() {
     return orderList;
   }
-
-//  public void addOrder(ListForm listform) {
-//    Order order = new Order();
-//    order.setItemId(listform.getItemId());
-//    order.setNum(listform.getNumber());
-//    orderList.add(order);
-//  }
 }

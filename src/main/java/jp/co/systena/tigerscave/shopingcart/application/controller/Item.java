@@ -1,7 +1,31 @@
 package jp.co.systena.tigerscave.shopingcart.application.controller;
 
 public class Item {
-  public int itemId;
-  public String name;
-  public int price;
+  int itemId;
+  String name;
+  int price;
+
+  public int getItemId() {
+    return itemId;
+  }
+
+  public void setItemId(int itemId) {
+    this.itemId = itemId;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
+  }
 }
