@@ -19,6 +19,11 @@ public class ListController {
 
   @RequestMapping(value = "/list", method = RequestMethod.GET) // URLとのマッピング
   public ModelAndView show(ModelAndView mav) {
+    // 商品一覧設定
+    ListService listService = new ListService();
+    mav.addObject("itemList", listService.getItemList());
+
+    //カート情報設定
     Cart cart = (Cart) session.getAttribute("cart");
     if (cart == null) {
       cart = new Cart();
@@ -28,10 +33,6 @@ public class ListController {
 
     // リストフォームを新規設定
     mav.addObject("listForm", new ListForm());
-
-    // 商品一覧設定
-    ListService listService = new ListService();
-    mav.addObject("itemList", listService.getItemList());
 
     //合計金額設定
     int total = totalMoney(cart, listService);
