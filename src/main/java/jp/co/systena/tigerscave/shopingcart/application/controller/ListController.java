@@ -88,6 +88,9 @@ public class ListController {
       // 新規でカートにオーダー追加
       cartList.add(order);
     }
+
+    //購入数が0の場合は削除
+    cartList.removeIf(rmOrder -> rmOrder.getNum()==0);
     session.setAttribute("cart", cart);
   }
 
