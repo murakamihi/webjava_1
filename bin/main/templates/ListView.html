@@ -8,16 +8,14 @@
 	<h1>商品一覧</h1>
 	<div
 		style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 300px;"
-		th:each="itemList : ${itemList}">
+		th:each="entry : ${itemList}">
 		<form action="#" th:action="@{/list}" th:object="${listForm}"
 			method="post">
-			<input type="hidden" name="itemId" th:value="${itemList.itemId}">
-			<!--  <input type="hidden" value="${itemList.itemId}" th:field="*{itemId}">-->
-			<p th:text="${itemList.name}"></p>
-			<tr>
-				<td>個数：</td>
-				<td><input type="number" min="0" th:field="*{num}" value="0"></td>
-			</tr>
+			<input type="hidden" name="itemId" th:value="${entry.value.itemId}">
+			<p th:text="${entry.value.name}"></p>
+			<p th:text="'単価：' + ${entry.value.price} +'円'"></p>
+			<p> 個数：
+			<input type="number" min="0" th:field="*{num}" value="0"></p>
 			<button type="submit" name="addCard">カートに追加</button>
 		</form>
 	</div>
@@ -25,44 +23,21 @@
 	<th:object th:if="!${#lists.isEmpty(cart.orderList)}">
 		<h1>カート</h1>
 		<th:object th:each="orderList : ${cart.orderList}">
-			<th:object th:each="itemList : ${itemList}">
-				<th:object th:if="${orderList.itemId}==${itemList.itemId}">
+			<th:object th:each="entry : ${itemList}">
+				<th:object th:if="${orderList.itemId}==${entry.value.itemId}">
 					<div
 						style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; width: 300px;">
-						<p th:text="'商品名：' + ${itemList.name}"></p>
+						<p th:text="'商品名：' + ${entry.value.name}"></p>
 						<p th:text="'個数：' + ${orderList.num}"></p>
-						<p th:text="'単価：' + ${itemList.price}"></p>
-						<p th:text="'小計：' + ${orderList.num}*${itemList.price}">
+						<p th:text="'単価：' + ${entry.value.price} +'円'"></p>
+						<p th:text="'小計：' + ${#numbers.formatInteger(orderList.num * entry.value.price,3,'COMMA')} +'円'">
 					</div>
 				</th:object>
 			</th:object>
 		</th:object>
 
 
-		<u><h2 th:text="'合計：' + ${total} +'円'"></h2></u>
+		<u><h2 th:text="'合計：' + ${#numbers.formatInteger(total,3,'COMMA')} +'円'"></h2></u>
 	</th:object>
-
-	<!--
-	<table border="1">
-		<tr>
-			<th>商品名</th>
-			<th>単価</th>
-			<th>個数</th>
-			<th>合計</th>
-		</tr>
-		<th:block th:each="orderList : ${cart.orderList}">
-			<th:block th:each="itemList : ${itemList}">
-				<th:block th:if="${orderList.itemId}==${itemList.itemId}">
-					<tr>
-						<td th:text="${itemList.name}"></td>
-						<td th:text="${orderList.num}"></td>
-						<td th:text="${itemList.price}"></td>
-						<td th:text="${orderList.num}*${itemList.price}"></td>
-					</tr>
-				</th:block>
-			</th:block>
-		</th:block>
-	</table>
-	-->
 </body>
 </html>
