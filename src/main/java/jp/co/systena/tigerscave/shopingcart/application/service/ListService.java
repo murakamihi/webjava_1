@@ -1,7 +1,8 @@
-package jp.co.systena.tigerscave.shopingcart.application.controller;
+package jp.co.systena.tigerscave.shopingcart.application.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.systena.tigerscave.shopingcart.application.model.Item;
 
 public class ListService {
 

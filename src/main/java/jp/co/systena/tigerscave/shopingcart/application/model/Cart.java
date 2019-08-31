@@ -1,4 +1,4 @@
-package jp.co.systena.tigerscave.shopingcart.application.controller;
+package jp.co.systena.tigerscave.shopingcart.application.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 public class Cart {
   public List<Order> orderList;
 
-  Cart() {
+  public Cart() {
     orderList = new ArrayList<Order>();
   }
 
@@ -28,9 +28,6 @@ public class Cart {
 
     List<Order> cartList = orderList;
     Map<Integer, Order> orderListMap = getOrderListMap(cartList);
-
-    // カートの中身を更新
-    //orderListMap.put(listform.getItemId(), order);
 
     //すでにカートに入っているアイテム数
     int orderNum = 0;
@@ -54,13 +51,11 @@ public class Cart {
     for (Iterator<Integer> i = orderListMap.keySet().iterator(); i.hasNext();) {
       int key = i.next();
       if (orderListMap.get(key).getNum() == 0) {
-        // とりあえず実施しない
         // 購入数が0の場合は削除
       } else {
         cartList.add(orderListMap.get(key));
       }
     }
-//    session.setAttribute("cart", cart);
   }
 
   private Map<Integer, Order> getOrderListMap(List<Order> cartList) {

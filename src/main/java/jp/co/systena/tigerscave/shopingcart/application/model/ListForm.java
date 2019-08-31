@@ -1,4 +1,4 @@
-package jp.co.systena.tigerscave.shopingcart.application.controller;
+package jp.co.systena.tigerscave.shopingcart.application.model;
 
 public class ListForm {
 

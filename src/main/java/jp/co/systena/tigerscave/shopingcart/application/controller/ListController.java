@@ -12,6 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import jp.co.systena.tigerscave.shopingcart.application.model.Cart;
+import jp.co.systena.tigerscave.shopingcart.application.model.Item;
+import jp.co.systena.tigerscave.shopingcart.application.model.ListForm;
+import jp.co.systena.tigerscave.shopingcart.application.service.ListService;
 
 @Controller
 public class ListController {
@@ -73,45 +77,6 @@ public class ListController {
     return new ModelAndView("redirect:/list"); // リダイレクト
   }
 
-//  private void addOrder(Cart cart, ListForm listform) {
-//    // オーダーにリストフォームを設定
-//    Order order = new Order();
-//    order.setItemId(listform.getItemId());
-//    order.setNum(listform.getNum());
-//
-//    List<Order> cartList = cart.getOrderList();
-//    Map<Integer, Order> orderListMap = getOrderListMap(cartList);
-//
-//    // カートの中身を更新
-//    orderListMap.put(listform.getItemId(), order);
-//
-//    cartList.clear();
-//    for (Iterator<Integer> i = orderListMap.keySet().iterator(); i.hasNext();) {
-//      int key = i.next();
-//      if (orderListMap.get(key).getNum() == 0) {
-//        // とりあえず実施しない
-//        // 購入数が0の場合は削除
-//      } else {
-//        cartList.add(orderListMap.get(key));
-//      }
-//    }
-//
-//    session.setAttribute("cart", cart);
-//  }
-
-//  private int calculateTotal(Cart cart, Map<Integer, Item> itemListMap) {
-//    // カートリストの合計金額
-//    int totalPrice = 0;
-//    if (!cart.getOrderList().isEmpty()) {
-//      for (Order order : cart.getOrderList()) {
-//        if (itemListMap.containsKey(order.getItemId())) {
-//          totalPrice += itemListMap.get(order.getItemId()).getPrice() * order.getNum();
-//        }
-//      }
-//    }
-//    return totalPrice;
-//  }
-
   private Map<Integer, Item> getItemListMap() {
     ListService listService = new ListService();
     List<Item> itemList = listService.getItemList();
@@ -123,13 +88,4 @@ public class ListController {
 
     return itemListMap;
   }
-
-//  private Map<Integer, Order> getOrderListMap(List<Order> cartList) {
-//    Map<Integer, Order> orderListMap = new HashMap<Integer, Order>();
-//    for (Order order : cartList) {
-//      orderListMap.put(order.getItemId(), order);
-//    }
-//
-//    return orderListMap;
-//  }
 }

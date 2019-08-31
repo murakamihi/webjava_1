@@ -1,15 +1,15 @@
-package jp.co.systena.tigerscave.shopingcart.application.controller;
+package jp.co.systena.tigerscave.shopingcart.application.model;
 
 public class Item {
   int itemId;
   String name;
   int price;
 
-  Item(){
+  public Item(){
 
   }
 
-  Item(int itemId, String name, int price) {
+  public Item(int itemId, String name, int price) {
     this.itemId = itemId;
     this.name = name;
     this.price = price;
